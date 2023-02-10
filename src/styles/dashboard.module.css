@@ -1,0 +1,135 @@
+.section {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.dashboardLinksContainer {
+  display: flex;
+  margin-top: 2rem;
+  column-gap: 1rem;
+}
+.dashboardLink {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  font-weight: normal;
+  font-size: 22px;
+}
+.icon {
+  height: 70px;
+  width: 70px;
+  margin: 0 auto;
+}
+.title {
+  margin: 0 auto;
+  font-weight: bold;
+  font-size: 3rem;
+}
+.agregarTatuaje {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3rem;
+  column-gap: 5rem;
+  align-items: center;
+}
+.agregarTatuaje h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+.agregarTatuaje form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.agregarTatuaje form input {
+  padding: 14px;
+  width: 95%;
+  margin-bottom: .75rem;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+.agregarTatuaje form input[type=submit], .agregarTatuaje form button {
+  padding: 16px;
+  border-radius: 4px;
+  border: 1px solid black;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: var(--gold);
+}
+.agregarTatuaje form input[type=submit]:disabled {
+  background-color: gray;
+}
+.formContainer {
+  display: flex;
+}
+.imagePreview {
+  height: 600px;
+  margin-top: 4.5rem;
+}
+
+.horizontalInputs {
+  display: flex;
+  width: 100%;
+  column-gap: 1rem;
+}
+.horizontalInputs div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.columns {
+  column-count: 3;
+  -moz-column-count: 3; 
+  -webkit-column-count: 3; 
+  width: 100%;
+  max-width: 1064px;
+}
+.imageContainer {
+  margin: 0;
+  margin-bottom: 10px;
+  position: relative;
+  display: block;
+  width: 100%;
+  border-radius: 2px;
+  overflow: hidden;
+  border: 1px solid black;
+}
+.image {
+  max-width: 100%;
+  object-fit: cover;
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0
+}
+.imageOriginalContainer {
+  height: 100%;
+  width: 390px;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+.imageOriginalContainer img {
+  width: 390px;
+  height: 100%;
+  object-fit: cover;
+}
+.designPreview {
+  width: 480px;
+  height: 380px;
+  aspect-ratio: 1/1;
+  background-color: white;
+  margin: 0.75rem auto 0 auto;
+  position: relative;
+  border-radius: 5px  ;
+}
+.design {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}

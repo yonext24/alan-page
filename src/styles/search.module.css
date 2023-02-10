@@ -1,0 +1,114 @@
+.header {
+  width: calc(100% + 52px);
+  margin: 0 -26px;
+  padding: 14px 2rem 14px 0;
+  display: flex;
+  box-shadow: 1px 0 6px 3px rgba(0, 0, 0, .1);
+  column-gap: 2rem;
+  border-radius: 0 0px 3px 3px;
+  position: relative
+}
+.logo {
+  filter: saturate(1.2);
+  margin: auto 0 auto 1rem
+}
+.icon {
+  height: 30px;
+  width: 30px;
+}
+.inputContainer button {
+  flex: 1;
+  border-radius: 0 8px 8px 0;
+  border: none;
+  background-color: var(--gold);
+  color: white;
+  cursor: pointer;
+}
+.inputContainer {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  position: relative
+}
+.inputSibling {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+  pointer-events: none;
+  border: 1px solid transparent;
+}
+.input {
+  padding: 16px;
+  border-radius: 8px 0 0 8px;
+  border: none;
+  width: 90%;
+  font-family: var(--prompt);
+  font-weight: normal;
+  font-size: 16px;
+  background-color: rgb(230, 230, 230);
+  color: black;
+  transition: background-color .3s;
+}
+.input::placeholder {
+  color: white;
+  transition: color .3s;
+}
+.input:focus {
+  outline: none;
+  background-color: white;
+}
+.input:focus::placeholder {
+  color: rgb(215,215,215);
+}
+.input:focus ~ .inputSibling {
+  outline: 2px solid rgb(214, 180, 68);
+}
+.input:focus ~ .icon {
+  display: block!important;
+}
+.tattooContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, .5fr));
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  gap: 2rem;
+  justify-content: center;
+}
+.warningContainer {
+  height: 2rem;
+  width: 100%
+}
+.warning {
+  padding: 5px 10px;
+  color: rgba(255, 68, 0, 0.539);
+  font-weight: normal;
+  font-size: 15px;
+  text-align: center;
+}
+.generateBtn {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  background-color: var(--violet);
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+@media (max-width: 500px) {
+  .header {
+    width: 100%;
+    margin: 0;
+  }
+}
+@media (max-width: 750px) {
+  .tattooContainer {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}

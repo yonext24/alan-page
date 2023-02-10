@@ -10,10 +10,24 @@
   },
   "dependencies": {
     "@next/font": "13.1.5",
-    "eslint": "8.32.0",
+    "compressorjs": "^1.1.1",
     "eslint-config-next": "13.1.5",
+    "firebase": "^9.16.0",
     "next": "13.1.5",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-image-crop": "^10.0.9"
+  },
+  "eslintConfig": {
+    "extends": "./node-modules/standard/eslintrc.json"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^6.5.1",
+    "eslint": "^8.33.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.32.2"
   }
 }

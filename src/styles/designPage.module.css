@@ -1,0 +1,92 @@
+.section {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  column-gap: 2.5rem;
+}
+.section::after {
+  content: "";
+  position: absolute;
+  height: 45%;
+  width: calc(100% + 52px);
+  top: 0;
+  left: -26px;
+  background-color: var(--gold);
+  z-index: -10;
+  box-shadow: 0 -5px 6px 12px rgba(0, 0, 0, 0.1) inset;
+}
+.section::before {
+  content: "";
+  height: 45%;
+  width: calc(100% + 52px);
+  position: absolute;
+  top: 0;
+  left: -26px;
+  background-image: url("/header-image.webp");
+  background-size: 20%;
+  filter: grayscale(1) brightness(0) opacity(.3 );
+  z-index: -9;
+}
+.imageContainer {
+  width: 480px;
+  height: 380px;
+  aspect-ratio: 1/1;
+  background-color: white;
+  margin: auto 2rem auto 0;
+  position: relative;
+  border-radius: 5px  ;
+}
+.border {
+  height: calc(100% + 12px);
+  width: calc(100% + 12px);
+  position: absolute;
+  bottom: -6px ;
+  left: -6px;
+  z-index: -5;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: -8px 8px 16px 4px rgba(0, 0, 0, 0.1);
+}
+.border::after {
+  content: "";
+  width: 128%;
+  margin: -25% -14%;
+  aspect-ratio: 1/1;
+  display: block;
+  background-image: linear-gradient(45deg, black, white );
+  animation: rotate 4s linear infinite;
+}
+@keyframes rotate {
+  from {
+    rotate: 0deg 
+  }
+  to { 
+  rotate: 360deg
+ }
+}
+.image {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+.dataContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-image: linear-gradient(45deg, #ffffff, rgb(241, 241, 241));
+  height: 90%;
+  margin: auto;
+  border-radius: 8px;
+  box-shadow: -8px 8px 12px 6px rgba(0, 0, 0, 0.1);
+}
+.titleContainer {
+  height: 45%;
+  display: grid;
+  place-content: center;
+}
+.title {
+  font-size: 58px;
+  color: rgb(27, 27, 27);
+  text-align: center;
+}

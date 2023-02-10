@@ -1,0 +1,18 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: 0 26px;
+  height: 100vh;
+  overflow-y: auto;
+  width: 100%;
+}
+@media (max-width: 620px) {
+  .main {
+    padding-bottom: 80px;
+  }
+}
+@media (max-width: 500px) {
+  .main {
+    padding: 0 0 80px 0
+  }
+}

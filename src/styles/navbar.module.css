@@ -1,0 +1,60 @@
+.nav {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: auto;
+  padding: 0 10px 0 10px;
+  color: black;
+  box-shadow: 1px 0px 10px 2px rgba(0,0,0,.2);
+  position: relative;
+}
+.div {
+  height: 80%;
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.icon {
+  width: 34px;
+  height: 34px;
+}
+
+.secretIcons {
+  display: flex;
+  flex-direction: column;
+  row-gap: .5rem;
+  margin-bottom: 1rem;
+}
+
+.secretIcons button, .div button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+@media (max-width: 620px) {
+  .nav {
+    flex-direction: row;
+    height: auto;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 20;
+    background-color: var(--milkyBlue);
+    padding: 8px 5px;
+  }
+  .div, .secretIcons {
+    flex-direction: row;
+  }
+  .div {
+    flex: 1
+  }
+  .secretIcons {
+    margin-bottom: 0;
+  }
+  .icon {
+    width: 40px;
+    height: 40px
+  }
+}
