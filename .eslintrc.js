@@ -19,6 +19,14 @@ module.exports = {
   rules: {
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
-    'react/jsx-indent': ['error', 4]
+    'react/jsx-indent': ['error', 4],
+    'react/no-unknown-property': [
+      2,
+      {
+        ignore: [
+          'jsx'
+        ]
+      }
+    ]
   }
 }

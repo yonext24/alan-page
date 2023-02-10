@@ -86,6 +86,12 @@ export default function Design () {
                 success && <span style={{ backgroundColor: 'green', padding: '1rem' }}>La imágen se subió correctamente</span>
               }
           </div>
+          {
+            errors.compressed && <span style={{ color: 'orangered', textAlign: 'center' }}>Error al hacer la compresión de la imágen</span>
+          }
+          {
+            errors.imageUploadingError && <span style={{ color: 'orangered', textAlign: 'center' }}>Error al subir la imágen.</span>
+          }
 
           {
               image && <>

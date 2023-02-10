@@ -31,6 +31,9 @@ export function TattoosSection () {
           }
       <div className={styles.masonry}>
           {
+            error && <span style={{ color: 'orangered', textAlign: 'center' }}>Error al recuperar los tatuajes.</span>
+        }
+          {
             tattoos.map(tattoo => <Tattoo key={tattoo.id} {...tattoo} />)
           }
       </div>
