@@ -1,0 +1,32 @@
+{
+  "id": "aCMMobnGoAPNtlwewj5C",
+  "duracion": "3 horas",
+  "nombre": "Serpiente Minimalista",
+  "imagesData": {
+      "original": {
+          "url": "https://firebasestorage.googleapis.com/v0/b/alan-page.appspot.com/o/2.jpg?alt=media&token=37bff87f-a7cb-4bf4-a1e7-ecdfc18626e4",
+          "yAxis": 0,
+          "height": 400,
+          "xAxis": 0,
+          "zoom": "1.0"
+      },
+      "preview": {
+          "zoom": "1.2",
+          "yAxis": "4",
+          "height": "600",
+          "url": "https://firebasestorage.googleapis.com/v0/b/alan-page.appspot.com/o/compressed2.jpg?alt=media&token=171526c6-68de-4efc-ba88-a04527de1b30",
+          "xAxis": "0"
+      }
+  },
+  "descripcion": "Serpiente con símbolos hecha con líneas minimalistas ",
+  "lugar": "espalda",
+  "estilos": [
+      "minimalista",
+      "lineas"
+  ],
+  "tags": [
+      "serpiente",
+      "minimalista",
+      "lineas"
+  ]
+}

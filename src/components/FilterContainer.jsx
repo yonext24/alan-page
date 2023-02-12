@@ -1,31 +1,77 @@
-export function FilterContainer ({ setFilters }) {
+import { useRef, useState } from 'react'
+import { useInputRecommendation } from 'src/hooks/useInputRecommendation'
+import { Recommendations } from './Recommendations'
+
+export function FilterContainer ({ filters, setFilters, data }) {
+  const [inputRecommendationOpen, setInputRecommendationOpen] = useState(null)
+  const [menuFocused, setMenuFocused] = useState(false)
+
+  const { inputRecommendations } = useInputRecommendation({ inputRecommendationOpen, data })
+
   const handleSubmit = e => {
     e.preventDefault()
     const filters = Object.fromEntries(new FormData(e.target))
     setFilters(filters)
   }
 
+  const tagsRef = useRef()
+  const nombreRef = useRef()
+  const lugarRef = useRef()
+  const estiloRef = useRef()
+
   return <>
       <form className='container' onSubmit={handleSubmit}>
           <h4>Filtrar Tatuajes</h4>
           <div className='flexrow'>
-              <div>
+              <div onFocus={() => { setInputRecommendationOpen('estilos') }} onBlur={() => { setInputRecommendationOpen(null) }}>
                   <label htmlFor='estilo'>Filtrar por estilo</label>
-                  <input type='text' name='estilo' id='estilo'></input>
+                  <input type='text' autoComplete='off' defaultValue={filters.estilo} name='estilo' id='estilo' ref={estiloRef}></input>
+                  {
+                    ((inputRecommendationOpen === 'estilos' && inputRecommendations !== []) || menuFocused) &&
+                    <Recommendations
+                    recommendations={inputRecommendations}
+                    setMenuFocused={setMenuFocused}
+                    inputRef={estiloRef}
+                    setInputRecommendationOpen={setInputRecommendationOpen} />
+                  }
               </div>
-              <div>
+              <div onFocus={() => { setInputRecommendationOpen('nombre') }} onBlur={() => { setInputRecommendationOpen(null) }}>
                   <label htmlFor='nombre'>Filtrar por nombre</label>
-                  <input type='text' name='nombre' id='nombre'></input>
+                  <input type='text' autoComplete='off' defaultValue={filters.nombre} name='nombre' id='nombre' ref={nombreRef}></input>
+                  {
+                    ((inputRecommendationOpen === 'nombre' && inputRecommendations !== []) || menuFocused) &&
+                    <Recommendations
+                    recommendations={inputRecommendations}
+                    setMenuFocused={setMenuFocused}
+                    inputRef={nombreRef}
+                    setInputRecommendationOpen={setInputRecommendationOpen} />
+                  }
               </div>
           </div>
           <div className='flexrow'>
-              <div>
+              <div onFocus={() => { setInputRecommendationOpen('lugar') }} onBlur={() => { setInputRecommendationOpen(null) }}>
                   <label htmlFor='lugar'>Filtrar por lugar</label>
-                  <input type='text' name='lugar' id='lugar'></input>
+                  <input type='text' autoComplete='off' defaultValue={filters.lugar} name='lugar' id='lugar' ref={lugarRef}></input>
+                  {
+                    ((inputRecommendationOpen === 'lugar' && inputRecommendations !== []) || menuFocused) &&
+                    <Recommendations
+                    recommendations={inputRecommendations}
+                    setMenuFocused={setMenuFocused}
+                    inputRef={lugarRef}
+                    setInputRecommendationOpen={setInputRecommendationOpen} />
+                  }
               </div>
-              <div>
+              <div onFocus={() => { setInputRecommendationOpen('tags') }} onBlur={() => { setInputRecommendationOpen(null) }}>
                   <label htmlFor='tags'>Filtrar por tags</label>
-                  <input type='text' name='tags' id='tags'></input>
+                  <input type='text' autoComplete='off' defaultValue={filters.tags} name='tags' id='tags' ref={tagsRef}></input>
+                  {
+                    ((inputRecommendationOpen === 'tags' && inputRecommendations !== []) || menuFocused) &&
+                    <Recommendations
+                    recommendations={inputRecommendations}
+                    setMenuFocused={setMenuFocused}
+                    inputRef={tagsRef}
+                    setInputRecommendationOpen={setInputRecommendationOpen} />
+                  }
               </div>
           </div>
           <input type='submit' value='Filtrar' className='submitBtn' />
@@ -62,6 +108,20 @@ export function FilterContainer ({ setFilters }) {
             flex-direction: row;
             gap: 10px
           }
+          .flexrow div {
+            position: relative
+          }
+          .submitBtn {
+            padding: 10px;
+            background-color: rgb(55,55,55);
+            border: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+            border-radius: 6px;
+            cursor: pointer
+          }
           @media (max-width: 482px) {
 
             .flexrow {
@@ -75,18 +135,6 @@ export function FilterContainer ({ setFilters }) {
             display: flex;
             flex-direction: column
           }
-          .submitBtn {
-            padding: 10px;
-            background-color: rgb(55,55,55);
-            border: none;
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            margin-top: 10px;
-            border-radius: 6px;
-            cursor: pointer
-          }
-
         `}</style>
   </>
 }

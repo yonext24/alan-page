@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export function TattooSearchCard ({ nombre, estilos, imagesData, descripcion, id, index }) {
   return <>
-      <Link href={`/tattoo/${id}`} className='a'>
+      <Link href={`/tattoo/${id}`} style={{ backgroundColor: 'var(--gold)', borderRadius: '3px' }}>
           <article>
               <Image
           src={imagesData.preview.url}
@@ -27,7 +27,14 @@ export function TattooSearchCard ({ nombre, estilos, imagesData, descripcion, id
           box-shadow: -6px 6px 12px 1px rgba(0,0,0,.1);
           border-radius: 3px;
           overflow: hidden;
-          height: 180px
+          height: 180px;
+          transition: transform .2s
+        }
+        article:hover {
+          transform: translate(.35rem, -.35rem)
+        }
+        article:active {
+          transform: translate(.15rem, -.15rem)
         }
         article div {
           flex: 1;

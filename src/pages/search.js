@@ -19,11 +19,12 @@ export default function Search ({ data }) {
     tags: ''
   })
   const [areFiltersOpen, setAreFiltersOpen] = useState(false)
+
   const router = useRouter()
+  const user = useUser()
 
   const { keyword, setKeyword, warning } = useSearch({ filters })
   const { filteredTattoos } = useTattoosFilter({ data, search: keyword, filters })
-  const user = useUser()
 
   useEffect(() => {
     const { estilo, nombre, tags, lugar, search } = router.query
@@ -72,7 +73,7 @@ export default function Search ({ data }) {
               <div className={styles.inputSibling}></div>
           </div>
           {
-            areFiltersOpen && <FilterContainer setFilters={setFilters} />
+            areFiltersOpen && <FilterContainer filters={filters} setFilters={setFilters} data={data} />
           }
       </header>
       <div className={styles.warningContainer}>

@@ -9,9 +9,9 @@ export function useTattoosFilter ({ data, search, filters }) {
   const filteredTattoos = useMemo(() => {
     // Si no hay filtros devuelvo el filtro por search
     if (!verifyFilters(filters)) {
-      if (search.length < 2) return []
+      if (search.length < 2) return data.slice(0, 15)
       const filtered = [...data].filter(el => el.nombre.toLowerCase().includes(search.toLowerCase()) || el.tags.includes(search.toLowerCase()))
-      return JSON.stringify(filtered) === JSON.stringify(data) ? [] : filtered
+      return filtered
     }
 
     const filtered = [...data]
