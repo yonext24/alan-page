@@ -28,7 +28,7 @@ export function Tattoo ({ imagesData: { preview: image }, id }) {
               translate: `${xAxis}% ${yAxis}%`
             }}
             sizes={`(max-width: 1000px) ${height}px,
-            50vw`}
+            70vw`}
             alt='Imágen de tatuaje'
             onLoadingComplete={() => { setLoading(false) }}
           />

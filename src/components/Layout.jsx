@@ -1,8 +1,8 @@
 import { Navbar } from './Navbar'
 import styles from '@/styles/layout.module.css'
-import { Prompt } from '@next/font/google'
+import { Noto_Sans as NotoSans } from '@next/font/google'
 
-const prompt = Prompt({
+const prompt = NotoSans({
   weight: ['400', '700'],
   subsets: ['latin'],
   fallback: ['system-ui', 'arial'],

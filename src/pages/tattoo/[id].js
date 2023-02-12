@@ -39,6 +39,7 @@ export default function Tattoo ({ data }) {
                 ref={image}
               />
               <ImageSkeleton hidden={imageLoading} />
+              <h3 className={`${styles.imageName} ${titleFont.className}`}>{data.nombre}</h3>
           </div>
           <div className={styles.dataContainer}>
               <h1 className={`${styles.name} ${titleFont.className}`}>{data.nombre}</h1>
