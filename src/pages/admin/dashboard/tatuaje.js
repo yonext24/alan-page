@@ -19,16 +19,17 @@ export default function Dashboard () {
   const [filePreviewZoom, setFilePreviewZoom] = useState('1.0')
   const [xPreviewAxis, setXPreviewAxis] = useState(0)
   const [yPreviewAxis, setYPreviewAxis] = useState(0)
-  const [qualityPreview, setQualityPreview] = useState(0.8)
+  const [qualityPreview, setQualityPreview] = useState(0.2)
   const [fileOriginalHeight, setFileOriginalHeight] = useState(400)
   const [fileOriginalZoom, setFileOriginalZoom] = useState('1.0')
   const [xOriginalAxis, setXOriginalAxis] = useState(0)
   const [yOriginalAxis, setYOriginalAxis] = useState(0)
-  const [qualityOriginal, setQualityOriginal] = useState(0.8)
+  const [qualityOriginal, setQualityOriginal] = useState(0.6)
   const [compressionError, setCompressionError] = useState(null)
   const [imagesUploaded, setImagesUploaded] = useState(false)
   const [loading, setLoading] = useState(false)
   const [imageShowing, setImageShowing] = useState('preview')
+  const [fileDimesions, setFileDimesions] = useState({})
 
   const user = useUser()
   const router = useRouter()
@@ -57,6 +58,7 @@ export default function Dashboard () {
                 yAxis: yPreviewAxis,
                 zoom: filePreviewZoom,
                 height: filePreviewHeight,
+                width: Math.floor(filePreviewHeight / (imageHeight / imageWidth)),
                 url: res.compressed
               },
               original: {
@@ -87,13 +89,21 @@ export default function Dashboard () {
   }
 
   const handleFileInput = e => {
+    let img = HTMLImageElement
+    img = document.createElement('img')
+
+    img.onload = () => {
+      setFileDimesions(prev => ({ ...prev, original: { width: img.width, height: img.height } }))
+    }
+
     setImage(prev => ({ ...prev, originalSaved: e.target.files[0] }))
     if (e.target.files.length) {
       // eslint-disable-next-line no-new
       new Compressor(e.target.files[0], {
-        quality: 0.2,
+        quality: 0.6,
         success (result) {
           setImage(prev => ({ ...prev, original: result }))
+          img.src = URL.createObjectURL(result)
         },
         error (err) {
           console.error(err)
@@ -103,6 +113,13 @@ export default function Dashboard () {
     }
   }
   const handleHomeFileInput = e => {
+    let img = HTMLImageElement
+    img = document.createElement('img')
+
+    img.onload = () => {
+      setFileDimesions(prev => ({ ...prev, compressed: { width: img.width, height: img.height } }))
+    }
+
     setImage(prev => ({ ...prev, previewSaved: e.target.files[0] }))
     if (e.target.files.length) {
       // eslint-disable-next-line no-new
@@ -110,6 +127,7 @@ export default function Dashboard () {
         quality: 0.2,
         success (result) {
           setImage(prev => ({ ...prev, compressed: result }))
+          img.src = URL.createObjectURL(result)
         },
         error (err) {
           console.error(err)

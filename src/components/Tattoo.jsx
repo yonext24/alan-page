@@ -7,7 +7,7 @@ import { ImageSkeleton } from './ImageSkeleton'
 export function Tattoo ({ imagesData: { preview: image }, id }) {
   const [loading, setLoading] = useState(true)
 
-  const { height, zoom, xAxis, yAxis, url } = image
+  const { height, width, zoom, xAxis, yAxis, url } = image
 
   return <>
       <Link href={`/tattoo/${id}`} style={{
@@ -21,14 +21,14 @@ export function Tattoo ({ imagesData: { preview: image }, id }) {
         overflow: 'hidden'
       }} className={styles.container}>
           <Image src={url}
-            fill={true}
             className={styles.image}
             style={{
               transform: `scale(${Number(zoom) - 0.025})`,
               translate: `${xAxis}% ${yAxis}%`
             }}
-            sizes={`(max-width: 1000px) ${height}px,
-            70vw`}
+            width={width}
+            height={height}
+            quality={100}
             alt='Imágen de tatuaje'
             onLoadingComplete={() => { setLoading(false) }}
           />

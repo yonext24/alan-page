@@ -89,7 +89,8 @@ export function FilterContainer ({ filters, setFilters, data }) {
             gap: 5px;
             color: white;
             padding: 15px 15px 25px 15px;
-            border-radius: 8px
+            border-radius: 8px;
+            z-index: 5
           }
           .container h4 {
             font-size: 22px

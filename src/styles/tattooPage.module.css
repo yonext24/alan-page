@@ -86,9 +86,23 @@
 }
 .tagsContainer {
   position: absolute;
-  top: 0;
+  top: 1.5rem;
   right: -1.8rem;
-  padding: 1.5rem 0;
+  height: 100%;
+  overflow: hidden;
+}
+.tagsContainer, .tagsContainer div {
+  display: flex;
+  column-gap: .25rem;
+  align-items: center;
+  text-orientation: upright;
+  writing-mode: vertical-rl;
+}
+.tagsContainer div {
+  font-weight: bold;
+  color: white;
+  padding: 0 5px 0 0;
+  white-space: nowrap;
 }
 .dataContainer::after {
   content: "";
@@ -111,18 +125,6 @@
   right: -1.5rem;
   z-index: -1;
   border-radius: 3px;
-}
-.tagsContainer, .tagsContainer div {
-  display: flex;
-  column-gap: .25rem;
-  align-items: center;
-  text-orientation: upright;
-  writing-mode: vertical-rl;
-}
-.tagsContainer div {
-  font-weight: bold;
-  color: white;
-  padding: 0 5px 0 0;
 }
 .button {
   padding: 22px 25px;

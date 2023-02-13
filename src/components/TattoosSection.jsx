@@ -23,7 +23,7 @@ export function TattoosSection () {
   }, [intersected])
 
   return <section className={styles.section} ref={fromRef}>
-      <h3 className={styles.subtitle}>Tatuajes Hechos</h3>
+      <h3 className={styles.subtitle}>Trabajos Realizados</h3>
       {
             loading && <div style={{ margin: '0 auto' }}>
                 <Spinner color='var(--gold)' size={'80px'} />
