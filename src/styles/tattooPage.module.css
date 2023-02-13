@@ -90,13 +90,13 @@
   right: -1.8rem;
   height: 100%;
   overflow: hidden;
+  text-orientation: upright;
+  writing-mode: vertical-rl;
 }
 .tagsContainer, .tagsContainer div {
   display: flex;
   column-gap: .25rem;
   align-items: center;
-  text-orientation: upright;
-  writing-mode: vertical-rl;
 }
 .tagsContainer div {
   font-weight: bold;
@@ -195,33 +195,14 @@
     min-height: auto;
   }
   .imageContainer {
+    height: auto;
     width: 100%;
-    height: 80vh;
-    border-radius: 0;
-  }
-  .imageContainer::after {
-    left: 0;
-    top: 0;
-    border-radius: 0;
   }
   .image {
     object-fit: contain;
     transform: none!important;
+    width: 100%;
   }
-  .dataContainer {
-    min-height: 80vh;
-    background-image: linear-gradient(180deg, white 0%, rgba(250,255,255,0.5) 65%, rgb(246, 255, 254) 100%);
-    box-shadow: none;
-    border-radius: 0;
-  }
-  .dataContainer::after, .dataContainer::before {
-    content: none;
-  }
-  .description, .button {
-    font-size: 20px;
-  }
-}
-@media (max-width: 500px) {
   .imageContainer::after {
     content: "";
     box-shadow: 0px -70px 19px -14px rgba(0,0,0,0.75) inset;
@@ -229,19 +210,53 @@
     -moz-box-shadow: 0px -70px 19px -14px rgba(0,0,0,0.75) inset;
     z-index: 2;
     background-color: transparent;
+    left: 0;
+    top: 0;
+    border-radius: 0;
   }
-  .imageContainer {
+  .dataContainer {
+    background-image: linear-gradient(180deg, white 0%, rgba(250,255,255,0.5) 65%, rgb(246, 255, 254) 100%);
+    border-radius: 0;
+    min-height: auto;
+    padding: 2rem 0;
+    row-gap: 5rem ;
+    margin-bottom: 1.5rem;
+  }
+  .dataContainer::before {
+    content: none;
+  }
+  .dataContainer::after {
+    height: 3rem;
+    width: 100%;
+    bottom: -2rem;
+    background-color: var(--gold);
+    left: 0;
+    top: unset;
+  }
+  .tagsContainer {
+    width: 100%;
+    bottom: -1.5rem;
+    background-color: var(--gold);
+    left: 0;
+    top: unset;
     height: auto;
+    text-orientation: unset;
+    writing-mode: unset;
+  }
+  .tagsContainer div {
+    word-spacing: 10px;
+    letter-spacing: 5px;
+    text-align: center;
+    width: 100%;
+    display: block;
+  }
+  .description, .button {
+    font-size: 20px;
   }
   .name {
     display: none;
   }
   .imageName {
     display: block;
-  }
-  .dataContainer {
-    min-height: auto;
-    padding: 2rem 0;
-    row-gap: 5rem ;
   }
 }
