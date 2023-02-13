@@ -58,7 +58,7 @@ export default function Dashboard () {
                 yAxis: yPreviewAxis,
                 zoom: filePreviewZoom,
                 height: filePreviewHeight,
-                width: Math.floor(filePreviewHeight / (imageHeight / imageWidth)),
+                width: Math.floor(filePreviewHeight / (fileDimesions.height / fileDimesions.width)),
                 url: res.compressed
               },
               original: {
