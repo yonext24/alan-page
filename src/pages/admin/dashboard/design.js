@@ -22,7 +22,6 @@ export default function Design () {
     try {
       const designTask = await subirArchivo(image)
       setImageUploaded(designTask)
-      console.log('la imagen se subió')
     } catch (err) { console.log('error', err); setErrors(prev => ({ ...prev, imageUploadingError: err })) }
   }
   const handleFileInput = e => {
