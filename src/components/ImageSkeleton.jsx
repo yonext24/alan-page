@@ -14,6 +14,9 @@ export function ImageSkeleton ({ hidden, color = 'white' }) {
         background-image: linear-gradient(45deg, #aaaaaa96, rgba(255, 255, 255, 0.572));
         display: ${!hidden ? 'none' : 'grid'};
         place-content:center;
+        position: absolute;
+        top: 0;
+        left: 0
       }
 
 

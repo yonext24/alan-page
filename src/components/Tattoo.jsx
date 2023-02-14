@@ -23,6 +23,7 @@ export function Tattoo ({ imagesData: { preview: image }, id }) {
           <Image src={url}
             className={styles.image}
             style={{
+              opacity: loading ? '0' : '1',
               transform: `scale(${Number(zoom) - 0.025})`,
               translate: `${xAxis}% ${yAxis}%`
             }}
@@ -33,12 +34,14 @@ export function Tattoo ({ imagesData: { preview: image }, id }) {
             onLoadingComplete={() => { setLoading(false) }}
           />
           {
-            loading && <ImageSkeleton></ImageSkeleton>
+            loading && <ImageSkeleton hidden={loading} />
           }
 
-          <div>
+          <span className={styles.firmaContainer} style={{
+            filter: loading ? 'brightness(0)' : 'none'
+          }}>
               <Image src='/header-image.webp' alt='firma' width={96} height={30} className={styles.firma} />
-          </div>
+          </span>
       </Link>
   </>
 }
