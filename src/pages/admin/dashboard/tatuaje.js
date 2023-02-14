@@ -58,7 +58,7 @@ export default function Dashboard () {
                 yAxis: yPreviewAxis,
                 zoom: filePreviewZoom,
                 height: filePreviewHeight,
-                width: Math.floor(filePreviewHeight / (fileDimesions.height / fileDimesions.width)),
+                width: Math.floor(Number(filePreviewHeight) / Number(fileDimesions.compressed.height / fileDimesions.compressed.width)),
                 url: res.compressed
               },
               original: {
@@ -80,6 +80,10 @@ export default function Dashboard () {
   const handleTattoosSubmit = async e => {
     e.preventDefault()
     console.log('triggger')
+    const imageOriginalPrefix = image.original.name.split('.').at(-1)
+    const imageCompressedPrefix = image.compressed.name.split('.').at(-1)
+    image.original.name = Date.now() + '.' + imageOriginalPrefix
+    image.compressed.name = Date.now() + '.' + imageCompressedPrefix
     if (image.original && image.compressed) {
       setLoading(true)
       const originalTask = await subirArchivo(image.original)
@@ -93,6 +97,7 @@ export default function Dashboard () {
     img = document.createElement('img')
 
     img.onload = () => {
+      console.log('cargó rei')
       setFileDimesions(prev => ({ ...prev, original: { width: img.width, height: img.height } }))
     }
 

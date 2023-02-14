@@ -51,13 +51,13 @@
 
 /* SingleTattoo */
 
-.container div {
+.container span {
   position: absolute;
-  z-index: 2;
   width: 6rem;
   bottom: -2px;
-  right: 5px;
-  pointer-events: none;
+  right: 50%;
+  transform: translateX(50%);
+  z-index: 2;
 }
 .firma {
   filter: grayscale(1) brightness(20);

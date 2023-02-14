@@ -3,7 +3,8 @@ import styles from '@/styles/tattooPage.module.css'
 import { Kaushan_Script as KaushanScript } from '@next/font/google'
 import { getSingleTattoo, getTattoos } from '../../../firebase/client'
 import { ImageSkeleton } from 'src/components/ImageSkeleton'
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
+import Image from 'next/image'
 
 const titleFont = KaushanScript({
   weight: '400',
@@ -12,14 +13,8 @@ const titleFont = KaushanScript({
 })
 
 export default function Tattoo ({ data }) {
-  const { imagesData: { original: { url, xAxis, yAxis, zoom } } } = data
   const [imageLoading, setImageLoading] = useState(true)
-
-  const image = useRef()
-
-  useEffect(() => {
-    if (image.current?.complete) setImageLoading(false)
-  }, [])
+  const { imagesData: { original: { url, xAxis, yAxis, zoom }, preview: { height, width } } } = data
 
   return <>
       <Head>
@@ -27,16 +22,17 @@ export default function Tattoo ({ data }) {
       </Head>
       <section className={styles.section}>
           <div className={styles.imageContainer}>
-              <img src={url}
+              <Image src={url}
                 className={styles.image}
                 alt='Imágen de tatuaje'
-                onLoad={() => { setImageLoading(false) }}
+                onLoadingComplete={() => { setImageLoading(false) }}
                 style={{
-                  display: imageLoading ? 'none' : 'block',
+                  opacity: imageLoading ? '0' : '1',
                   transform: `scale(${Number(zoom) - 0.025})`,
                   translate: `${xAxis}% ${yAxis}%`
                 }}
-                ref={image}
+                width={390}
+                height={Math.floor(390 / (width / height))}
               />
               <ImageSkeleton hidden={imageLoading} />
               <h3 className={`${styles.imageName} ${titleFont.className}`}>{data.nombre}</h3>
