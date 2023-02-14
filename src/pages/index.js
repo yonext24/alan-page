@@ -2,8 +2,9 @@ import Head from 'next/head'
 import { Header } from '@/components/Header'
 import { DesignsSection } from 'src/components/DesignsSection'
 import { TattoosSection } from 'src/components/TattoosSection'
+import { getDesigns } from '../../firebase/client'
 
-export default function Home () {
+export default function Home ({ designs }) {
   return (
       <>
           <Head>
@@ -13,8 +14,18 @@ export default function Home () {
               <link rel="icon" href="/favicon.ico" />
           </Head>
           <Header />
-          <DesignsSection />
+          <DesignsSection serverDesigns={designs} />
           <TattoosSection />
       </>
   )
+}
+
+export async function getServerSideProps () {
+  const designs = await getDesigns()
+
+  return {
+    props: {
+      designs
+    }
+  }
 }

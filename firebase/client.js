@@ -92,6 +92,17 @@ export const getTattoos = async () => {
     })
     .catch(err => new Error(err))
 }
+export const getDesigns = async () => {
+  return getDocs(collection(db, 'designs'))
+    .then(snapshot => {
+      return snapshot.docs.map(doc => {
+        const data = doc.data()
+        const id = doc.id
+        return { id, ...data }
+      })
+    })
+    .catch(err => new Error(err))
+}
 
 export const getSingleTattoo = async (id) => {
   const docRef = doc(db, 'tatuajes-hechos', id)

@@ -12,11 +12,9 @@
   color: var(--marine-blue);
   margin: 1rem 0 1.5rem 2rem
 }
-.container {
-  display: flex;
-  width: 100%;
-  column-gap: 1rem;
-  justify-content: space-between;
+.section > div {
+  max-width: 1260px;
+  margin: 0 auto;
 }
 .design {
   border-radius: 4px;
@@ -34,4 +32,10 @@
   filter: brightness(.84);
   transition-property: transform, filter;
   transition: .12s ease-out;
+}
+@media (max-width: 400px) {
+  .design {
+    height: 150px;
+    width: 150px
+  }
 }
