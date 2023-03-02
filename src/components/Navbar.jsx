@@ -1,5 +1,4 @@
 import styles from '@/styles/navbar.module.css'
-import Pen from '../../public/icons/pen.svg'
 import Home from '../../public/icons/house.svg'
 import Logout from '../../public/icons/logout.svg'
 import Admin from '../../public/icons/admin.svg'
@@ -21,10 +20,6 @@ export function Navbar () {
           <Link href='/search'>
               <Search className={styles.icon} alt='Ícono de búsqueda' style={{ color: router.pathname === '/search' ? 'var(--gold)' : 'black' }}/>
           </Link>
-          <div>
-              <Pen className={styles.icon} alt='Ícono de lápiz'/>
-          </div>
-
       </div>
       {
         typeof user === 'object' &&

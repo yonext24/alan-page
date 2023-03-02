@@ -12,6 +12,16 @@
   filter: saturate(1.2);
   margin: auto 0 auto 1rem
 }
+@media (max-width: 350px) {
+  .logo {
+    display: none
+  }
+  .header {
+    width: 100%;
+    margin: 0;
+    padding: 14px 1rem;
+  }
+}
 .icon {
   height: 30px;
   width: 30px;

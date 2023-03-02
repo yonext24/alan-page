@@ -260,3 +260,23 @@
     display: block;
   }
 }
+.deleteButton {
+  position: absolute;
+  height: 2rem;
+  width: 2rem;
+  color: red;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform .1s
+}
+.deleteButton:hover {
+  transform: translateY(-3px);
+}
+@media (max-width: 1020px) {
+  .section {
+    column-gap: .5rem;
+  }
+}

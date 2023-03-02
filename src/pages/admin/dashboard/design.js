@@ -45,8 +45,8 @@ export default function Design () {
           const designData = Object.fromEntries(new FormData(formRef.current))
           designData.tags = designData.tags.split(' ')
           designData.estilos = designData.estilos.split(' ')
-          console.log({ ...designData, imageUrl: res })
-          agregarDesign({ ...designData, imageUrl: res })
+          const path = imageUploaded.ref._location.path_
+          agregarDesign({ ...designData, imageUrl: res, path })
             .then(res => { setLoading(false); setSuccess(true) })
         })
     }
@@ -78,6 +78,8 @@ export default function Design () {
                           <input required type='text' id='estilos' name='estilos' placeholder='Estilos del diseño...'/>
                       </div>
                   </div>
+                  <label htmlFor='precio'>Precio del tatuaje</label>
+                  <input required type='number' name='precio' id='precio'></input>
                   <input required type="file" id="image" accept="image/png, image/jpeg" onChange={handleFileInput}></input>
                   <input type='submit' value='Enviar' disabled={loading} />
               </form>

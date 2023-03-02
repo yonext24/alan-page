@@ -5,7 +5,7 @@ import 'keen-slider/keen-slider.min.css'
 import { useMemo, useState } from 'react'
 import { Arrow } from './Arrow'
 
-export function DesignsSection ({ serverDesigns }) {
+export function DesignsSection ({ serverDesigns, error }) {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [sliderRef, instanceRef] = useKeenSlider({
     breakpoints: {
@@ -31,6 +31,7 @@ export function DesignsSection ({ serverDesigns }) {
   })
 
   const designs = useMemo(() => {
+    if (!serverDesigns) return
     if (serverDesigns.length >= 6) return [...serverDesigns]
 
     const returnValue = []
@@ -39,24 +40,30 @@ export function DesignsSection ({ serverDesigns }) {
     for (let i = 0; returnValue.length <= 5; i++) {
       if (i > serverDesigns.length - 1) i = 0
 
-      returnValue.push({ ...serverDesigns[i], id })
+      returnValue.push({ ...serverDesigns[i], key: id })
       id += 1
     }
     return returnValue
   }, [serverDesigns])
 
+  console.log(designs)
+
   return <section className={styles.section} >
       <h3 className={styles.subtitle}>Diseños Disponibles</h3>
-      <div ref={sliderRef} className='keen-slider'>
+      {
+        error
+          ? <span style={{ color: 'orangered', textAlign: 'center', padding: '5rem' }}>Hubo un error al recuperar los diseños 😢 refrescá la página</span>
+          : <div ref={sliderRef} className='keen-slider'>
 
-          <Arrow left onClick={e => e.stopPropagation() || instanceRef.current?.prev()} disabled={currentSlide === 0} />
+              <Arrow left onClick={e => e.stopPropagation() || instanceRef.current?.prev()} disabled={currentSlide === 0} />
 
-          {
-            designs.map(({ id, imageUrl }) => <Design key={id} image={imageUrl} />)
+              {
+            designs.map(({ id, imageUrl, key }) => <Design key={key} image={imageUrl} id={id} />)
           }
 
-          <Arrow onClick={e => e.stopPropagation() || instanceRef.current?.next() } disabled={currentSlide === instanceRef.current?.track.details.slides.length - 1}/>
+              <Arrow onClick={e => e.stopPropagation() || instanceRef.current?.next() } disabled={currentSlide === instanceRef.current?.track.details.slides.length - 1}/>
 
-      </div>
+          </div>
+      }
   </section>
 }

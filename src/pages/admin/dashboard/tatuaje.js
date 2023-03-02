@@ -59,14 +59,16 @@ export default function Dashboard () {
                 zoom: filePreviewZoom,
                 height: filePreviewHeight,
                 width: Math.floor(Number(filePreviewHeight) / Number(fileDimesions.compressed.height / fileDimesions.compressed.width)),
-                url: res.compressed
+                url: res.compressed,
+                path: imagesUploaded.compressedTask.ref._location.path_
               },
               original: {
                 xAxis: xOriginalAxis,
                 yAxis: yOriginalAxis,
                 zoom: fileOriginalZoom,
                 height: fileOriginalHeight,
-                url: res.original
+                url: res.original,
+                path: imagesUploaded.originalTask.ref._location.path_
               }
             }
           }

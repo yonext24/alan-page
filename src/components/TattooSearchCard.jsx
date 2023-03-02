@@ -28,7 +28,22 @@ export function TattooSearchCard ({ nombre, estilos, imagesData, descripcion, id
           border-radius: 3px;
           overflow: hidden;
           height: 180px;
-          transition: transform .2s
+          transition: transform .2s;
+          position: relative;
+        }
+        article::after {
+          content: "";
+          background-image: url('/header-image.webp');
+          height: 100%;
+          width: 100%;
+          background-size: 150px;
+          background-position: center;
+          background-repeat: repeat;
+          background-clip: border-box;
+          position: absolute;
+          filter: grayscale(1) opacity(.09);
+          left: 0;
+          top: 0;
         }
         article:hover {
           transform: translate(.35rem, -.35rem)

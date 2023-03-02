@@ -1,8 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { initializeApp } from 'firebase/app'
-import { getFirestore, collection, addDoc, getDocs, getDoc, doc } from 'firebase/firestore'
-import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
+import { getFirestore, collection, addDoc, getDocs, getDoc, doc, deleteDoc } from 'firebase/firestore'
+import { deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -19,7 +19,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
-
 const auth = getAuth()
 
 export const onAuthStateChanged = (setState) => {
@@ -53,9 +52,9 @@ export const agregarTatuaje = async ({ nombre, descripcion, estilos, duracion, l
     throw new Error(e)
   }
 }
-export const agregarDesign = async ({ nombre, descripcion, estilos, tags, imageUrl }) => {
+export const agregarDesign = async ({ nombre, descripcion, estilos, tags, imageUrl, path, precio }) => {
   try {
-    const docRef = await addDoc(collection(db, 'designs'), { nombre, descripcion, tags, estilos, imageUrl })
+    const docRef = await addDoc(collection(db, 'designs'), { nombre, descripcion, tags, estilos, imageUrl, path, precio })
     return docRef
   } catch (e) {
     throw new Error(e)
@@ -65,6 +64,7 @@ export const agregarDesign = async ({ nombre, descripcion, estilos, tags, imageU
 export const subirArchivo = async (file, filename) => {
   const storage = getStorage()
   const tatuajesRef = ref(storage, filename || file.name)
+  console.log(tatuajesRef)
   return await uploadBytesResumable(tatuajesRef, file)
 }
 
@@ -90,7 +90,6 @@ export const getTattoos = async () => {
         return { id, ...data }
       })
     })
-    .catch(err => new Error(err))
 }
 export const getDesigns = async () => {
   return getDocs(collection(db, 'designs'))
@@ -101,11 +100,39 @@ export const getDesigns = async () => {
         return { id, ...data }
       })
     })
-    .catch(err => new Error(err))
 }
 
-export const getSingleTattoo = async (id) => {
-  const docRef = doc(db, 'tatuajes-hechos', id)
+export const getSingleTattoo = async (id, collection = 'tatuajes-hechos') => {
+  const docRef = doc(db, collection, id)
   return getDoc(docRef)
-    .then(snap => snap.data())
+    .then(snap => {
+      const data = snap.data()
+
+      return { id: snap.id, ...data }
+    })
+}
+
+export const deleteTattoo = async (id, imagesData) => {
+  const storage = getStorage()
+  try {
+    const originalRef = ref(storage, imagesData.original.path)
+    const compressedRef = ref(storage, imagesData.preview.path)
+
+    await deleteObject(originalRef)
+    await deleteObject(compressedRef)
+
+    await deleteDoc(doc(db, 'tatuajes-hechos', id))
+    return true
+  } catch (err) {
+    return new Error(err)
+  }
+}
+export const deleteDesign = async (id, path) => {
+  const storage = getStorage()
+
+  const reference = ref(storage, path)
+
+  await deleteObject(reference)
+  await deleteDoc(doc(db, 'designs', id))
+  return true
 }

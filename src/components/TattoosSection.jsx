@@ -29,13 +29,13 @@ export function TattoosSection () {
                 <Spinner color='var(--gold)' size={'80px'} />
             </div>
           }
-      <div className={styles.masonry}>
+      <div className={styles.masonry} style={{ columnCount: error && 'unset', display: error && 'flex' }}>
           {
-            error && <span style={{ color: 'orangered', textAlign: 'center' }}>Error al recuperar los tatuajes.</span>
+            error
+              ? <span style={{ color: 'orangered', textAlign: 'center', width: '100%', padding: '5rem' }}>Hubo un error al recuperar los tatuajes 😢 refrescá la página</span>
+              : tattoos && tattoos.map(tattoo => <Tattoo key={tattoo.id} {...tattoo} />)
+
         }
-          {
-            tattoos.map(tattoo => <Tattoo key={tattoo.id} {...tattoo} />)
-          }
       </div>
   </section>
 }

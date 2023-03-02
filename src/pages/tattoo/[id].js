@@ -5,6 +5,9 @@ import { getSingleTattoo, getTattoos } from '../../../firebase/client'
 import { ImageSkeleton } from 'src/components/ImageSkeleton'
 import { useState } from 'react'
 import Image from 'next/image'
+import Trash from '../../../public/icons/trash.svg'
+import useUser from 'hooks/useUser'
+import { DeleteModal } from 'src/components/DeleteModal'
 
 const titleFont = KaushanScript({
   weight: '400',
@@ -13,14 +16,21 @@ const titleFont = KaushanScript({
 })
 
 export default function Tattoo ({ data }) {
+  console.log(data)
   const [imageLoading, setImageLoading] = useState(true)
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const { imagesData: { original: { url, xAxis, yAxis, zoom }, preview: { height, width } } } = data
+
+  const user = useUser()
 
   return <>
       <Head>
           <title>{data.nombre} | Neptuno Black</title>
       </Head>
       <section className={styles.section}>
+          {
+          isModalOpen && <DeleteModal data={data} setIsModalOpen={setIsModalOpen} />
+        }
           <div className={styles.imageContainer}>
               <Image src={url}
                 className={styles.image}
@@ -48,6 +58,12 @@ export default function Tattoo ({ data }) {
                   </div>
               </div>
               <button className={styles.button}><span>Calculadora de precios</span></button>
+              {
+                user &&
+                <button className={styles.deleteButton} onClick={() => { setIsModalOpen(prev => !prev) }}>
+                    <Trash />
+                </button>
+              }
           </div>
       </section>
   </>
