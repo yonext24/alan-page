@@ -16,7 +16,7 @@ export function TattooSearchCard ({ nombre, imagesData, descripcion, id, index }
                 priority={index + 1}
                 className='image'
                 onLoadingComplete={() => { setImageLoading(false) }}
-                style={{ objectFit: 'contain', objectPosition: 'left' }}
+                style={{ objectFit: 'contain', objectPosition: 'left', zIndex: 1 }}
                 alt='Resultado de tatuaje' />
               <ImageSkeleton hidden={imageLoading} color='var(--gold)' width='150px' />
               <div>

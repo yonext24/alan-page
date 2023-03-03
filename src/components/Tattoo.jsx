@@ -34,7 +34,7 @@ export function Tattoo ({ imagesData: { preview: image }, id }) {
             onLoadingComplete={() => { setLoading(false) }}
           />
           {
-            loading && <ImageSkeleton hidden={loading} />
+            loading && <ImageSkeleton hidden={loading} color='var(--gold)' />
           }
 
           <span className={styles.firmaContainer} style={{

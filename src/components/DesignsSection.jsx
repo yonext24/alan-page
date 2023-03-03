@@ -22,7 +22,7 @@ export function DesignsSection ({ serverDesigns, error }) {
         slides: { perView: 6, spacing: 10 }
       }
     },
-    slides: { perView: 2, spacing: 5 },
+    slides: { perView: 2, spacing: 1 },
     loop: true,
     initial: 0,
     slideChanged (slider) {
@@ -45,8 +45,6 @@ export function DesignsSection ({ serverDesigns, error }) {
     }
     return returnValue
   }, [serverDesigns])
-
-  console.log(designs)
 
   return <section className={styles.section} >
       <h3 className={styles.subtitle}>Diseños Disponibles</h3>

@@ -120,5 +120,8 @@
 @media (max-width: 750px) {
   .tattooContainer {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    row-gap: 1rem;
+    width: calc(100% - 2rem)!important;
+    margin: 0 auto;
   }
 }
