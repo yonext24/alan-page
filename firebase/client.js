@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { initializeApp } from 'firebase/app'
-import { getFirestore, collection, addDoc, getDocs, getDoc, doc, deleteDoc } from 'firebase/firestore'
+import { getFirestore, collection, addDoc, getDocs, getDoc, doc, deleteDoc, query, where } from 'firebase/firestore'
 import { deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -42,10 +42,10 @@ export const cerrarSesion = () => {
     .then()
 }
 
-export const agregarTatuaje = async ({ nombre, descripcion, estilos, duracion, lugar, tags, imagesData }) => {
+export const agregarTatuaje = async ({ nombre, descripcion, estilos, duracion, lugar, tags, imagesData, homeVisible }) => {
   try {
     const docRef = await addDoc(collection(db, 'tatuajes-hechos'), {
-      nombre, descripcion, tags, imagesData, estilos, duracion, lugar
+      nombre, descripcion, tags, imagesData, estilos, duracion, lugar, homeVisible
     })
     return docRef
   } catch (e) {
@@ -91,6 +91,21 @@ export const getTattoos = async () => {
       })
     })
 }
+export const getHomeTattoos = async () => {
+  const collectionRef = collection(db, 'tatuajes-hechos')
+  const q = query(collectionRef, where('homeVisible', '==', true))
+  console.log(q)
+
+  return getDocs(q).then(snapshot => {
+    console.log(snapshot)
+    return snapshot.docs.map(doc => {
+      const data = doc.data()
+      const id = doc.id
+      return { id, ...data }
+    })
+  })
+}
+
 export const getDesigns = async () => {
   return getDocs(collection(db, 'designs'))
     .then(snapshot => {

@@ -57,13 +57,21 @@ export default function Tattoo ({ data }) {
                   }
                   </div>
               </div>
-              <button className={styles.button}><span>Calculadora de precios</span></button>
+              {/* <button className={styles.button}><span>Calculadora de precios</span></button> */}
               {
                 user &&
                 <button className={styles.deleteButton} onClick={() => { setIsModalOpen(prev => !prev) }}>
                     <Trash />
                 </button>
               }
+              <Image
+                src='/header-image.webp'
+                width={115}
+                height={38}
+                className={styles.logo}
+                alt='Logo'
+                priority={true}
+              />
           </div>
       </section>
   </>

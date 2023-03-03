@@ -58,7 +58,14 @@ export default function DesignPage ({ data }) {
               <a href={`https://api.whatsapp.com/send?phone=1156459824&text=${pageHref + router.asPath} Hola! te quiero consultar por este tatuaje`}
                target='_blank' rel='noreferrer'
                className={styles.button}><span><Whatsapp style={{ height: 26, width: 26 }} />Contactáme por este diseño</span></a>
-
+              <Image
+                src='/header-image.webp'
+                width={115}
+                height={38}
+                className={styles.logo}
+                alt='Logo'
+                priority={true}
+              />
           </div>
       </section>
   </>

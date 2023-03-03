@@ -3,12 +3,38 @@
   flex-direction: column;
   width: 100%;
   margin-top: 1.5rem;
+  position: relative;
+}
+.section::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: calc(100% + 52px);
+  top: 0;
+  left: -26px;
+  background-image: #f9f9f9;
+  z-index: -10;
+  box-shadow: 2px 47px 77px -51px rgba(0,0,0,0.75) inset;
+  -webkit-box-shadow: 2px 47px 77px -51px rgba(0,0,0,0.75) inset;
+  -moz-box-shadow: 2px 47px 77px -51px rgba(0,0,0,0.75) inset;
+}
+.section::before {
+  content: "";
+  height: 100%;
+  width: calc(100% + 52px);
+  position: absolute;
+  top: 0;
+  left: -26px;
+  background-image: url("/header-image.webp");
+  background-size: 220px;
+  filter: grayscale(1) brightness(0) opacity(.05);
+  z-index: -9;
 }
 .subtitle {
   font-size: 35px;
   font-weight: 700;
-  color: var(--marine-blue);
-  margin: 1rem 0 1.5rem 2rem
+  color: black;
+  margin: 1.5rem 0 2rem 2rem
 }
 .masonry {
   column-count: 3;

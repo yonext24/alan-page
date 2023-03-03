@@ -5,6 +5,7 @@
   z-index: 0;
   border-bottom: 2px solid var(--gold);
   box-shadow: 5px 3px 12px 6px rgba(0, 0, 0, 0.199);
+  margin-top: 26px;
 }
 .header {
   color: white;
@@ -86,6 +87,7 @@
   }
   .section {
     background-image: linear-gradient(180deg, var(--gold) 0%, white 60%);
+    margin-top: 0px!important;
   }
   .data {
     padding: 0

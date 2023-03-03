@@ -1,6 +1,6 @@
 import styles from '@/styles/tattoos.module.css'
 import { Tattoo } from './Tattoo'
-import { getTattoos } from '../../firebase/client'
+import { getHomeTattoos } from '../../firebase/client'
 import { useEffect, useState } from 'react'
 import { Spinner } from './Spinner'
 import useIntersectionObserver from 'src/hooks/useIntersectionObserver'
@@ -15,7 +15,7 @@ export function TattoosSection () {
   useEffect(() => {
     if (intersected) {
       setLoading(true)
-      getTattoos()
+      getHomeTattoos()
         .then(setTattoos)
         .catch(setError)
         .finally(setLoading(false))

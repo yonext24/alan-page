@@ -30,6 +30,7 @@ export default function Dashboard () {
   const [loading, setLoading] = useState(false)
   const [imageShowing, setImageShowing] = useState('preview')
   const [fileDimesions, setFileDimesions] = useState({})
+  const [homeVisible, setHomeVisible] = useState(true)
 
   const user = useUser()
   const router = useRouter()
@@ -52,6 +53,7 @@ export default function Dashboard () {
             ...tattoo,
             tags: normalizedTags,
             estilos: normalizedStyles,
+            homeVisible,
             imagesData: {
               preview: {
                 xAxis: xPreviewAxis,
@@ -179,6 +181,10 @@ export default function Dashboard () {
                   <form onSubmit={handleTattoosSubmit} ref={formRef}>
                       <h3>Agregar tatuaje ya hecho</h3>
 
+                      <label htmlFor='homeVisible'>Va a ser visible en la home?</label>
+                      <input type='checkbox' name='homeVisible' id='homeVisible'
+                      checked={homeVisible} onChange={e => { setHomeVisible(prev => !prev); console.log(e.target.checked) }}></input>
+
                       <label htmlFor='nombre'>Nombre del tatuaje</label>
                       <input required type='text' id='nombre' name='nombre' placeholder='Nombre del tatuaje...'/>
 
@@ -255,13 +261,13 @@ export default function Dashboard () {
                 imageShowing === 'preview'
                   ? image.compressed && <div className={styles.columns}>
                       <div className={styles.imageContainer} style={{ height: `${filePreviewHeight}px` }} >
-                          <img src={URL.createObjectURL(image.compressed)} className={styles.image} style={{ transform: `scale(${filePreviewZoom}) translateX(${xPreviewAxis}%) translateY(${yPreviewAxis}%)` }} />
+                          <img src={URL.createObjectURL(image.compressed)} className={styles.image} style={{ transform: `scale(${Number(filePreviewZoom) - 0.025}) translateX(${xPreviewAxis}%) translateY(${yPreviewAxis}%)` }} />
                       </div>
                       <div className={styles.imageContainer} style={{ height: `${filePreviewHeight}px` }} >
-                          <img src={URL.createObjectURL(image.compressed)} className={styles.image} style={{ transform: `scale(${filePreviewZoom}) translateX(${xPreviewAxis}%) translateY(${yPreviewAxis}%)` }} />
+                          <img src={URL.createObjectURL(image.compressed)} className={styles.image} style={{ transform: `scale(${Number(filePreviewZoom) - 0.025}) translateX(${xPreviewAxis}%) translateY(${yPreviewAxis}%)` }} />
                       </div>
                       <div className={styles.imageContainer} style={{ height: `${filePreviewHeight}px` }} >
-                          <img src={URL.createObjectURL(image.compressed)} className={styles.image} style={{ transform: `scale(${filePreviewZoom}) translateX(${xPreviewAxis}%) translateY(${yPreviewAxis}%)` }} />
+                          <img src={URL.createObjectURL(image.compressed)} className={styles.image} style={{ transform: `scale(${Number(filePreviewZoom) - 0.025}) translateX(${xPreviewAxis}%) translateY(${yPreviewAxis}%)` }} />
                       </div>
                   </div>
                   : <div className={styles.imageOriginalContainer}>

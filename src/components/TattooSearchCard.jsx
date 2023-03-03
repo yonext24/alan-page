@@ -1,18 +1,24 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState } from 'react'
+import { ImageSkeleton } from './ImageSkeleton'
 
-export function TattooSearchCard ({ nombre, estilos, imagesData, descripcion, id, index }) {
+export function TattooSearchCard ({ nombre, imagesData, descripcion, id, index }) {
+  const [imageLoading, setImageLoading] = useState(true)
+
   return <>
       <Link href={`/tattoo/${id}`} style={{ backgroundColor: 'var(--gold)', borderRadius: '3px' }}>
           <article>
               <Image
-          src={imagesData.preview.url}
-          width={150}
-          height={180}
-          priority={index + 1}
-          className='image'
-          style={{ objectFit: 'contain', objectPosition: 'left' }}
-          alt='Resultado de tatuaje' />
+                src={imagesData.preview.url}
+                width={150}
+                height={180}
+                priority={index + 1}
+                className='image'
+                onLoadingComplete={() => { setImageLoading(false) }}
+                style={{ objectFit: 'contain', objectPosition: 'left' }}
+                alt='Resultado de tatuaje' />
+              <ImageSkeleton hidden={imageLoading} color='var(--gold)' width='150px' />
               <div>
                   <h4>{nombre}</h4>
                   <p>{descripcion}</p>

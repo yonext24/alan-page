@@ -43,14 +43,15 @@ export default function Search ({ data }) {
   }
   const handleGenerateLink = () => {
     const { estilo, nombre, lugar, tags } = filters
+    const pageHref = process.env.NODE_ENV === 'development' ? 'localhost:3000' : 'alan-page.vercel.app'
     const filtersValues = Object.values(filters)
     const arrayOfBooleans = filtersValues.map(el => el !== '')
     if (arrayOfBooleans.includes(true)) {
-      navigator.clipboard.writeText(`localhost:3000/search?estilo=${estilo}&nombre=${nombre}&tags=${tags}&lugar=${lugar}`)
+      navigator.clipboard.writeText(`${pageHref}/search?estilo=${estilo}&nombre=${nombre}&tags=${tags}&lugar=${lugar}`)
       return
     }
     if (keyword) {
-      navigator.clipboard.writeText(`localhost:3000/search?search=${keyword}`)
+      navigator.clipboard.writeText(`${pageHref}/search?search=${keyword}`)
     }
   }
 
