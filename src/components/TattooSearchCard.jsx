@@ -13,7 +13,7 @@ export function TattooSearchCard ({ nombre, imagesData, descripcion, id, index }
                 src={imagesData.preview.url}
                 width={150}
                 height={180}
-                priority={index + 1}
+                loading='lazy'
                 className='image'
                 onLoadingComplete={() => { setImageLoading(false) }}
                 style={{ objectFit: 'contain', objectPosition: 'left', zIndex: 1 }}

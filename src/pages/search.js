@@ -96,6 +96,10 @@ export default function Search ({ data }) {
 export async function getServerSideProps () {
   const data = await getTattoos()
 
+  await new Promise((resolve) => {
+    setTimeout(() => { resolve() }, 1500)
+  })
+
   return {
     props: {
       data

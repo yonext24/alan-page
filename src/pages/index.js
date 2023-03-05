@@ -5,6 +5,7 @@ import { TattoosSection } from 'src/components/TattoosSection'
 import { getDesigns } from '../../firebase/client'
 
 export default function Home ({ designs, error }) {
+  console.log(designs)
   return (
       <>
           <Head>
@@ -14,7 +15,7 @@ export default function Home ({ designs, error }) {
               <link rel="icon" href="/favicon.ico" />
           </Head>
           <Header />
-          <DesignsSection serverDesigns={designs} error={error} />
+          <DesignsSection designs={designs} error={error} />
           <TattoosSection />
       </>
   )
@@ -23,7 +24,24 @@ export default function Home ({ designs, error }) {
 export async function getServerSideProps () {
   try {
     const designs = await getDesigns()
-    console.log(designs, 'ERROR EN EL TRY')
+
+    if (designs.length < 5) {
+      const returnValue = []
+
+      let id = 0
+      for (let i = 0; returnValue.length <= 5; i++) {
+        if (i > designs.length - 1) i = 0
+
+        returnValue.push({ ...designs[i], key: id })
+        id += 1
+      }
+
+      return {
+        props: {
+          designs: returnValue
+        }
+      }
+    }
 
     return {
       props: {

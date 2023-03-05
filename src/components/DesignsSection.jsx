@@ -2,10 +2,10 @@ import styles from '@/styles/designs.module.css'
 import { Design } from './Design'
 import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { Arrow } from './Arrow'
 
-export function DesignsSection ({ serverDesigns, error }) {
+export function DesignsSection ({ designs, error }) {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [sliderRef, instanceRef] = useKeenSlider({
     breakpoints: {
@@ -30,22 +30,6 @@ export function DesignsSection ({ serverDesigns, error }) {
     }
   })
 
-  const designs = useMemo(() => {
-    if (!serverDesigns) return
-    if (serverDesigns.length >= 6) return [...serverDesigns]
-
-    const returnValue = []
-
-    let id = 0
-    for (let i = 0; returnValue.length <= 5; i++) {
-      if (i > serverDesigns.length - 1) i = 0
-
-      returnValue.push({ ...serverDesigns[i], key: id })
-      id += 1
-    }
-    return returnValue
-  }, [serverDesigns])
-
   return <section className={styles.section} >
       <h3 className={styles.subtitle}>Diseños Disponibles</h3>
       {
@@ -59,7 +43,7 @@ export function DesignsSection ({ serverDesigns, error }) {
             designs.map(({ id, imageUrl, key }) => <Design key={key} image={imageUrl} id={id} />)
           }
 
-              <Arrow onClick={e => e.stopPropagation() || instanceRef.current?.next() } disabled={currentSlide === instanceRef.current?.track.details.slides.length - 1}/>
+              <Arrow onClick={e => e.stopPropagation() || instanceRef.current?.next()} disabled={currentSlide === instanceRef.current?.track.details.slides.length - 1}/>
 
           </div>
       }
