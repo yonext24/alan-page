@@ -1,11 +1,10 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useInputRecommendation } from 'src/hooks/useInputRecommendation'
 import { Recommendations } from './Recommendations'
 
 export function FilterContainer ({ filters, setFilters, data }) {
   const [inputRecommendationOpen, setInputRecommendationOpen] = useState(null)
   const [menuFocused, setMenuFocused] = useState(false)
-
   const { inputRecommendations } = useInputRecommendation({ inputRecommendationOpen, data })
 
   const handleSubmit = e => {
@@ -13,6 +12,13 @@ export function FilterContainer ({ filters, setFilters, data }) {
     const filters = Object.fromEntries(new FormData(e.target))
     setFilters(filters)
   }
+
+  useEffect(() => {
+    tagsRef.current.value = filters.tags
+    nombreRef.current.value = filters.nombre
+    lugarRef.current.value = filters.lugar
+    estiloRef.current.value = filters.estilo
+  }, [filters])
 
   const tagsRef = useRef()
   const nombreRef = useRef()
@@ -114,7 +120,7 @@ export function FilterContainer ({ filters, setFilters, data }) {
           }
           .submitBtn {
             padding: 10px;
-            background-color: rgb(55,55,55);
+            background-color: var(--black);
             border: none;
             color: white;
             font-size: 18px;

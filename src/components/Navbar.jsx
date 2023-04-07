@@ -15,10 +15,10 @@ export function Navbar () {
   return <nav className={styles.nav}>
       <div className={styles.div}>
           <Link href='/'>
-              <Home className={styles.icon} alt='Ícono de casa' style={{ color: router.pathname === '/' ? 'var(--gold)' : 'black' }}/>
+              <Home className={styles.icon} alt='Ícono de casa' style={{ color: router.pathname === '/' ? 'var(--gold)' : 'white' }}/>
           </Link>
           <Link href='/search'>
-              <Search className={styles.icon} alt='Ícono de búsqueda' style={{ color: router.pathname === '/search' ? 'var(--gold)' : 'black' }}/>
+              <Search className={styles.icon} alt='Ícono de búsqueda' style={{ color: router.pathname === '/search' ? 'var(--gold)' : 'white' }}/>
           </Link>
       </div>
       {

@@ -4,6 +4,7 @@
   --marine-blue: rgb(16 23 31);
   --milkyBlue: rgb(249, 253, 255);
   --violet: #6423a1;
+  --black: rgb(27, 27, 27);
 }
 
 *, *::after, *::before {

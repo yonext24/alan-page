@@ -9,6 +9,8 @@ import { ImageInputs } from 'src/components/ImageInputs'
 import { ToggleTypeOfImage } from 'src/components/ToggleTypeOfImage'
 
 export default function Dashboard () {
+  // This is the worst code i have written in my entire life, it doesnt show my current level
+  // but it works ^^
   const [image, setImage] = useState({
     originalSaved: null,
     original: null,
@@ -34,7 +36,6 @@ export default function Dashboard () {
 
   const user = useUser()
   const router = useRouter()
-
   const formRef = useRef()
 
   useEffect(() => {
@@ -74,9 +75,8 @@ export default function Dashboard () {
               }
             }
           }
-          const docRef = agregarTatuaje(dataToSend)
-            .then(res => console.log(res))
-          docRef && setLoading(false)
+          agregarTatuaje(dataToSend)
+            .then(res => window.location.reload())
         })
     }
   }, [imagesUploaded])
@@ -101,7 +101,6 @@ export default function Dashboard () {
     img = document.createElement('img')
 
     img.onload = () => {
-      console.log('cargó rei')
       setFileDimesions(prev => ({ ...prev, original: { width: img.width, height: img.height } }))
     }
 

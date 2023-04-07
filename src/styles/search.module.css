@@ -30,8 +30,8 @@
   flex: 1;
   border-radius: 0 8px 8px 0;
   border: none;
-  background-color: var(--gold);
-  color: white;
+  background-color: var(--black);
+  color: var(--gold);
   cursor: pointer;
 }
 .inputContainer {
@@ -74,7 +74,7 @@
   color: rgb(215,215,215);
 }
 .input:focus ~ .inputSibling {
-  outline: 2px solid rgb(214, 180, 68);
+  outline: 2px solid var(--gold);
 }
 .input:focus ~ .icon {
   display: block!important;
@@ -103,18 +103,24 @@
   position: absolute;
   right: 1rem;
   bottom: 1rem;
-  background-color: var(--violet);
+  background-color: var(--gold);
   color: white;
   font-weight: bold;
   border: none;
-  padding: 10px;
+  padding: 15px;
   cursor: pointer;
+  border-radius: 6px;
 }
 
 @media (max-width: 500px) {
   .header {
     width: 100%;
     margin: 0;
+  }
+}
+@media (max-width: 620px) {
+  .generateBtn {
+    bottom: 5rem
   }
 }
 @media (max-width: 750px) {

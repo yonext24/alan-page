@@ -1,7 +1,7 @@
 .section {
   min-width: 100%;
   position: relative;
-  background-image: linear-gradient(0deg, var(--gold) 0%, white 60%);
+  background-image: linear-gradient(0deg, var(--gold) 0%, var(--black) 50%);
   z-index: 0;
   border-bottom: 2px solid var(--gold);
   box-shadow: 5px 3px 12px 6px rgba(0, 0, 0, 0.199);
@@ -50,7 +50,7 @@
   margin: auto 0 auto 1.5rem;
   padding-bottom: 4rem;
   letter-spacing: 1px;
-  color: black;
+  color: white;
 }
 .image {
   background-color: black;
@@ -86,9 +86,7 @@
     text-align: center;
   }
   .section {
-    background-image: linear-gradient(180deg, var(--gold) 0%, white 60%);
-    margin-top: 0px!important;
-    padding-bottom: 1rem;
+    background-image: linear-gradient(180deg, var(--gold) 0%, var(--black) 50%);
   }
   .data {
     padding: 0
@@ -99,6 +97,11 @@
     margin: 0;
     line-height: 28px;
     width: 100%
+  }
+}
+@media (max-width: 500px) {
+  .section {
+    margin-top: 0
   }
 }
 @media (max-width: 415px) {

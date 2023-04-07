@@ -28,7 +28,6 @@ export function TattooSearchCard ({ nombre, imagesData, descripcion, id, index }
 
       <style jsx>{`
         article {
-          background-color: white;
           display: flex;
           box-shadow: -6px 6px 12px 1px rgba(0,0,0,.1);
           border-radius: 3px;
@@ -36,6 +35,7 @@ export function TattooSearchCard ({ nombre, imagesData, descripcion, id, index }
           height: 180px;
           transition: transform .2s;
           position: relative;
+          background-color: var(--black);
         }
         article::after {
           content: "";
@@ -43,11 +43,12 @@ export function TattooSearchCard ({ nombre, imagesData, descripcion, id, index }
           height: 100%;
           width: 100%;
           background-size: 150px;
+          background-color: transparent;
           background-position: center;
           background-repeat: repeat;
           background-clip: border-box;
           position: absolute;
-          filter: grayscale(1) opacity(.09);
+          filter: grayscale(1) opacity(.15);
           left: 0;
           top: 0;
         }
@@ -62,10 +63,12 @@ export function TattooSearchCard ({ nombre, imagesData, descripcion, id, index }
           padding: 5px;
           display: flex; 
           flex-direction: column;
+          color: white
         }
         h4 {
           font-size: 18px;
-          text-align: center
+          text-align: center;
+          color: var(--gold)
         }
         p {
           font-size: 15px;

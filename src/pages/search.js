@@ -2,58 +2,30 @@ import Head from 'next/head'
 import styles from '@/styles/search.module.css'
 import Image from 'next/image'
 import Filter from '../../public/icons/filter.svg'
-import { useEffect, useState } from 'react'
 import { getTattoos } from '../../firebase/client'
-import { useSearch } from 'src/hooks/useSearch'
-import { useTattoosFilter } from 'src/hooks/useTattosSearch'
 import { FilterContainer } from 'src/components/FilterContainer'
 import { TattooSearchCard } from 'src/components/TattooSearchCard'
-import { useRouter } from 'next/router'
 import useUser from 'hooks/useUser'
+import { useSearchPage } from 'src/hooks/useSearchPage'
+import { useRecommendations } from 'src/hooks/useRecommendations'
+import { RecommendationsSection } from 'src/components/RecommendationsSection'
 
 export default function Search ({ data }) {
-  const [filters, setFilters] = useState({
-    nombre: '',
-    lugar: '',
-    estilo: '',
-    tags: ''
-  })
-  const [areFiltersOpen, setAreFiltersOpen] = useState(false)
-
-  const router = useRouter()
   const user = useUser()
 
-  const { keyword, setKeyword, warning } = useSearch({ filters })
-  const { filteredTattoos } = useTattoosFilter({ data, search: keyword, filters })
+  const {
+    handleGenerateLink,
+    filteredTattoos,
+    areFiltersOpen,
+    setAreFiltersOpen,
+    handleChange,
+    keyword,
+    filters,
+    setFilters
+  } = useSearchPage({ data })
+  console.log(filters)
 
-  useEffect(() => {
-    const { estilo, nombre, tags, lugar, search } = router.query
-    if (estilo !== undefined && nombre !== undefined && tags !== undefined && lugar !== undefined) {
-      setFilters({ estilo, nombre, tags, lugar })
-    }
-    if (search) {
-      setKeyword(search)
-    }
-  }, [router.query])
-
-  const handleChange = e => {
-    const newQuery = e.target.value
-    if (newQuery.startsWith(' ')) return
-    setKeyword(newQuery)
-  }
-  const handleGenerateLink = () => {
-    const { estilo, nombre, lugar, tags } = filters
-    const pageHref = process.env.NODE_ENV === 'development' ? 'localhost:3000' : 'alan-page.vercel.app'
-    const filtersValues = Object.values(filters)
-    const arrayOfBooleans = filtersValues.map(el => el !== '')
-    if (arrayOfBooleans.includes(true)) {
-      navigator.clipboard.writeText(`${pageHref}/search?estilo=${estilo}&nombre=${nombre}&tags=${tags}&lugar=${lugar}`)
-      return
-    }
-    if (keyword) {
-      navigator.clipboard.writeText(`${pageHref}/search?search=${keyword}`)
-    }
-  }
+  const { recommendations } = useRecommendations({ data: data.slice(0, 10) })
 
   return <>
       <Head>
@@ -77,17 +49,13 @@ export default function Search ({ data }) {
             areFiltersOpen && <FilterContainer filters={filters} setFilters={setFilters} data={data} />
           }
       </header>
-      <div className={styles.warningContainer}>
-          {
-            warning && <div className={styles.warning}>{warning}</div>
-          }
-      </div>
+      <RecommendationsSection filters={filters} recommendations={recommendations} setFilters={setFilters} />
       <section className={styles.tattooContainer}>
           {
             filteredTattoos.map((tattoo, index) => <TattooSearchCard key={tattoo.id} {...tattoo} index={index} />)
           }
           {
-            user && <button className={styles.generateBtn} name='Generate link' onClick={handleGenerateLink}>Generar Link</button>
+            user && <button className={styles.generateBtn} name='Generate link' onClick={() => handleGenerateLink(filters)}>Generar Link</button>
           }
       </section>
   </>
@@ -95,10 +63,6 @@ export default function Search ({ data }) {
 
 export async function getServerSideProps () {
   const data = await getTattoos()
-
-  await new Promise((resolve) => {
-    setTimeout(() => { resolve() }, 1500)
-  })
 
   return {
     props: {
