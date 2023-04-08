@@ -23,7 +23,6 @@ export default function Search ({ data }) {
     filters,
     setFilters
   } = useSearchPage({ data })
-  console.log(filters)
 
   const { recommendations } = useRecommendations({ data: data.slice(0, 10) })
 

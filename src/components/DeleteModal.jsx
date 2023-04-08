@@ -5,11 +5,9 @@ import { deleteDesign, deleteTattoo } from '../../firebase/client'
 export function DeleteModal ({ data, setIsModalOpen, isDesign }) {
   const [success, setSuccess] = useState(false)
   const router = useRouter()
-  console.log(data)
 
   const handleSubmit = async e => {
     e.preventDefault()
-    console.log(data)
     if (!isDesign) {
       const result = deleteTattoo(data.id, data.imagesData)
       if (result) {

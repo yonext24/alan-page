@@ -27,19 +27,12 @@ export const onAuthStateChanged = (setState) => {
   })
 }
 
-export const iniciarSesion = ({ email, password }) => {
-  signInWithEmailAndPassword(auth, email, password)
-    .then(({ user }) => {
-      console.log('salió bien', user)
-    })
-    .catch(err => {
-      console.log(err)
-    })
+export const iniciarSesion = async ({ email, password }) => {
+  return signInWithEmailAndPassword(auth, email, password)
 }
 
-export const cerrarSesion = () => {
-  auth.signOut()
-    .then()
+export const cerrarSesion = async () => {
+  await auth.signOut()
 }
 
 export const agregarTatuaje = async ({ nombre, descripcion, estilos, duracion, lugar, tags, imagesData, homeVisible }) => {

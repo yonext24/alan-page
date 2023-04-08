@@ -16,9 +16,12 @@ export default function Login () {
 
   const handleSubmit = e => {
     e.preventDefault()
-    const error = iniciarSesion(keywords)
-    console.log(error)
-    error && setError(error)
+    iniciarSesion(keywords)
+      .catch(err => {
+        if (err.code === 'auth/invalid-email') {
+          setError('Email inválido')
+        }
+      })
   }
 
   useEffect(() => {
@@ -30,7 +33,7 @@ export default function Login () {
       <input type='password' placeholder='Contraseña...' onChange={e => setKeywords({ ...keywords, password: e.target.value })} />
       <input type='submit' value='Enviar'/>
       {
-        error && <span>{error}</span>
+        error && <span style={{ color: 'red' }}>{error}</span>
       }
   </form>
 }

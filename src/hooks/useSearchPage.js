@@ -34,8 +34,9 @@ export function useSearchPage ({ data }) {
       const pageHref = process.env.NODE_ENV === 'development' ? 'localhost:3000' : 'alan-page.vercel.app'
       const filtersValues = Object.values(filters)
       const arrayOfBooleans = filtersValues.map(el => el !== '')
+      console.log('trigger')
       if (arrayOfBooleans.includes(true)) {
-        console.log('trigger')
+        console.log('includes')
         navigator.clipboard.writeText(`${pageHref}/search?${estilo && '&estilo=' + estilo}${nombre && '&nombre=' + nombre}${tags && '&tags=' + tags}${lugar && '&lugar=' + lugar}`)
         return
       }

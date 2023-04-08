@@ -16,7 +16,6 @@ const titleFont = KaushanScript({
 })
 
 export default function Tattoo ({ data }) {
-  console.log(data)
   const [imageLoading, setImageLoading] = useState(true)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { imagesData: { original: { url, xAxis, yAxis, zoom }, preview: { height, width } } } = data
