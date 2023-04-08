@@ -29,12 +29,12 @@ export function useSearchPage ({ data }) {
   }, [router.query])
 
   const handleGenerateLink = useCallback(
-    () => {
+    (filters) => {
       const { estilo, nombre, lugar, tags } = filters
       const pageHref = process.env.NODE_ENV === 'development' ? 'localhost:3000' : 'alan-page.vercel.app'
       const filtersValues = Object.values(filters)
       const arrayOfBooleans = filtersValues.map(el => el !== '')
-      console.log('trigger')
+      console.log(arrayOfBooleans)
       if (arrayOfBooleans.includes(true)) {
         console.log('includes')
         navigator.clipboard.writeText(`${pageHref}/search?${estilo && '&estilo=' + estilo}${nombre && '&nombre=' + nombre}${tags && '&tags=' + tags}${lugar && '&lugar=' + lugar}`)

@@ -5,7 +5,6 @@ import { TattoosSection } from 'src/components/TattoosSection'
 import { getDesigns } from '../../firebase/client'
 
 export default function Home ({ designs, error }) {
-  console.log(designs)
   return (
       <>
           <Head>
