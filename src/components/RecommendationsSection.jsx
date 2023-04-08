@@ -16,7 +16,7 @@ export function RecommendationsSection ({ recommendations, setFilters, filters }
           <h2>Filtrar por:</h2>
           <div className='container'>
               {
-          recommendations.slice(0, 5).map(({ campo, value, string }) => (
+          recommendations.map(({ campo, value, string }) => (
               <div className={`recommendation ${filters[campo] === value ? 'setted' : ''}`} onClick={() => handleClick(campo, value)} key={value}>
                   <span>{string}</span> <span>{value}</span>
               </div>
@@ -29,6 +29,7 @@ export function RecommendationsSection ({ recommendations, setFilters, filters }
         section {
           display: flex;
           margin: 20px 0px;
+          column-gap: 1rem
         }
         h2 {
           white-space: nowrap;
@@ -41,7 +42,10 @@ export function RecommendationsSection ({ recommendations, setFilters, filters }
           width: 100%;
           gap: 10px;
           justify-content: center;
-          align-items: center
+          align-items: center;
+          max-height: 28px;
+          flex-wrap: wrap;
+          overflow: hidden;
         }
         .recommendation {
           background-color: var(--black);
